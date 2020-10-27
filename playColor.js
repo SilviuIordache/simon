@@ -7,19 +7,19 @@ export function playColor(color) {
   switch (color) {
     case 0:
       flashSquare(red);
-      //redAudio.play();
+      redAudio.play();
       break;
     case 1:
       flashSquare(yellow);
-      //yellowAudio.play();
+      yellowAudio.play();
       break;
     case 2:
       flashSquare(blue);
-      //blueAudio.play();
+      blueAudio.play();
       break;
     case 3:
       flashSquare(green);
-      //greenAudio.play();
+      greenAudio.play();
       break;
     default:
       break;
