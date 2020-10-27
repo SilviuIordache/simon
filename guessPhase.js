@@ -1,5 +1,6 @@
 import { playColor } from './playColor.js'
 import STATE from './state.js';
+import InfoPanel from './info.js';
 
 export default class GuessPhase {
   constructor() {
@@ -8,14 +9,17 @@ export default class GuessPhase {
     this.blue = document.getElementById('blue');
     this.green = document.getElementById('green');
 
-    this.challengeSequence;
+    this.challengeSequence = [];
     this.guessSequence = [];
+    
+    this.info = new InfoPanel();
 
     this.setup();
   }  
 
   start(sequence) {
     this.addGuessListeners();
+    this.guessSequence = [];
     this.challengeSequence = sequence;
   }
 
@@ -73,7 +77,7 @@ export default class GuessPhase {
     }
 
     if (guess) {
-      console.log('good')
+      this.
       if (this.guessSequence.length === this.challengeSequence.length) {
        console.log('you guessed the whole sequence');
        this.guessSequence = [];
