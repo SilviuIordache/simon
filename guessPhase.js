@@ -11,7 +11,7 @@ export default class GuessPhase {
 
     this.challengeSequence = [];
     this.guessSequence = [];
-    
+
     this.info = new InfoPanel();
 
     this.setup();
@@ -77,12 +77,16 @@ export default class GuessPhase {
     }
 
     if (guess) {
-      this.
       if (this.guessSequence.length === this.challengeSequence.length) {
        console.log('you guessed the whole sequence');
        this.guessSequence = [];
        STATE.set('roundwin');
        this.removeGuessListeners();
+      } else {
+        this.info.toggle('on', 'good')
+        setTimeout(() => {
+          this.info.toggle('off')
+        }, 500)
       }
     } else {
       STATE.set('gameover');
