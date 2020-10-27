@@ -7,7 +7,7 @@ export default class StateManager {
   constructor() {
     this.sequence = [];
     this.guessPhase = new GuessPhase();
-    this.challengePhase = new ChallengePhase(this.sequence);
+    this.challengePhase = new ChallengePhase();
     this.info = new InfoPanel();
   }
 
@@ -60,7 +60,7 @@ export default class StateManager {
     this.info.toggle('on', 'Memorize');
     let newNumber = Math.floor(Math.random() * Math.floor(4));
     this.sequence.push(newNumber);
-    this.challengePhase.playSequence();
+    this.challengePhase.playSequence(this.sequence);
   }
 
   guessing() {
@@ -86,6 +86,8 @@ export default class StateManager {
   gameover() {
     this.sequence = [];
     this.info.toggle('on', 'Game over, click anywhere to restart');
-    // this.addStartGameListener();
+    setTimeout(() => {
+      this.addStartGameListener();
+    }, 0);
   }
 }
