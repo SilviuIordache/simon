@@ -84,8 +84,8 @@ export default class StateManager {
   }
 
   gameover() {
-    this.sequence = [];
     this.info.toggle('on', `game over; score: ${this.sequence.length}. click anywhere to restart`);
+    this.sequence = [];
     setTimeout(() => {
       this.addStartGameListener();
     }, 0);
