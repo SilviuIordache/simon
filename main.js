@@ -1,3 +1,2 @@
-import Game from './game.js'
-
-new Game();
+import STATE from './state.js';
+STATE.set('idle');

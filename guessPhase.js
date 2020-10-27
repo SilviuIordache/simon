@@ -77,7 +77,7 @@ export default class GuessPhase {
       if (this.guessSequence.length === this.challengeSequence.length) {
        console.log('you guessed the whole sequence');
        this.guessSequence = [];
-       STATE.set('start');
+       STATE.set('roundwin');
        this.removeGuessListeners();
       }
     } else {
