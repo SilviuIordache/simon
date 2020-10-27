@@ -65,6 +65,7 @@ body {
   right: 0;
   top: 48%;
   text-align: center;
+  z-index: 10000;
 }
 .hide {
   visibility: hidden;

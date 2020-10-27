@@ -1,9 +1,11 @@
+import StateManager from './stateManager.js';
+
 class State {
   constructor (storage) {
+    this.stateManager = new StateManager();
     this.FIELDNAME = 'simonState';
     this.STATES = {
       idle: 'idle',
-      start: 'start',
       challenge: 'challenge',
       handoff: 'handoff',
       guessing: 'guessing',
@@ -19,32 +21,9 @@ class State {
 
   set(state) {
     this.storage.setItem(this.FIELDNAME, state || this.STATES.idle);
-    console.log(`state: ${state}`)
-  }
-
-  isIdle() {
-    return this.get() === this.STATES.idle;
-  }
-
-  isGuessing() {
-    return this.get() === this.STATES.guessing;
-  }
-
-  isChallenge() {
-    return this.get() === this.STATES.challenge;
-  }
-
-  isStart() {
-    return this.get() === this.STATES.start;
-  }
-
-  isHandoff() {
-    return this.get() === this.STATES.handoff;
-  }
-
-  isGameOver() {
-    return this.get() === this.STATES.gameover;
+    console.log(`state: ${state}`);
+    this.stateManager.handle(state);
   }
 }
-const STATE = new State(sessionStorage);
+const STATE = new State(localStorage);
 export default STATE;
