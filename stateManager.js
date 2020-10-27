@@ -68,7 +68,7 @@ export default class StateManager {
   }
   
   roundwin() {
-    this.info.toggle('on', `Round win, score: ${this.sequence.length}`);
+    this.info.toggle('on', `round win, score: ${this.sequence.length}`);
     setTimeout(() => {
       this.info.toggle('off')
       STATE.set('challenge');
@@ -85,7 +85,7 @@ export default class StateManager {
 
   gameover() {
     this.sequence = [];
-    this.info.toggle('on', 'Game over, click anywhere to restart');
+    this.info.toggle('on', `game over; score: ${this.sequence.length}. click anywhere to restart`);
     setTimeout(() => {
       this.addStartGameListener();
     }, 0);
