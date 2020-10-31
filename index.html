@@ -8,8 +8,18 @@
 </head>
 <body>
   <div class="simon">
-    <div id="info-panel-container">
+    <div id="info-panel-container" class="hide">
       <div id="info-panel"></div>
+    </div>
+    <div id="menu">
+      <button id="start-button" type="button" onclick="alert('The handler!')">
+        START NEW GAME
+      </button>
+      <div id="sound-volume-container">
+        <label>SOUND</label>
+        <input id="sound-volume" type="range" min="0" max="10">
+        <audio id="sound-track" src="./audio/soundtrack-challenge.mp3"></audio>
+      </div>
     </div>
     <div class="container">
       <div id="red" class="square flash"></div>

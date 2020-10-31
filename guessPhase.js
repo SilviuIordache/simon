@@ -1,6 +1,6 @@
 import { playColor } from './playColor.js'
 import STATE from './state.js';
-import InfoPanel from './info.js';
+import INFO from './info.js';
 
 export default class GuessPhase {
   constructor() {
@@ -11,9 +11,7 @@ export default class GuessPhase {
 
     this.challengeSequence = [];
     this.guessSequence = [];
-
-    this.info = new InfoPanel();
-
+    this.countDown;
     this.setup();
   }  
 
@@ -21,6 +19,7 @@ export default class GuessPhase {
     this.addGuessListeners();
     this.guessSequence = [];
     this.challengeSequence = sequence;
+    this.startCountDown();
   }
 
   setup() {
@@ -54,6 +53,22 @@ export default class GuessPhase {
     this.evaluateSequence();
   }
 
+  startCountDown() {
+    clearInterval(this.countDown);
+    let counter = 5 + this.challengeSequence.length;
+    this.countDown = setInterval(() => {
+      INFO.toggle('on', counter)
+      counter--;
+      if (counter === 0) {
+        INFO.toggle('off', counter);
+        STATE.set('gameover');
+        this.removeGuessListeners();
+        clearInterval(this.countDown);
+      }
+    }, 1000);
+
+  }
+
   addGuessListeners() {
     red.addEventListener('click', this.redListener);
     yellow.addEventListener('click', this.yellowListener);
@@ -80,16 +95,18 @@ export default class GuessPhase {
       if (this.guessSequence.length === this.challengeSequence.length) {
        console.log('you guessed the whole sequence');
        this.guessSequence = [];
+       clearInterval(this.countDown);
        STATE.set('roundwin');
        this.removeGuessListeners();
       } else {
-        this.info.toggle('on', 'good')
+        INFO.toggle('on', 'good')
         setTimeout(() => {
-          this.info.toggle('off')
+          INFO.toggle('off')
         }, 500)
       }
     } else {
       STATE.set('gameover');
+      clearInterval(this.countDown);
       this.removeGuessListeners();
     }
     return guess;
