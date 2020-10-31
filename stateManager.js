@@ -10,13 +10,17 @@ export default class StateManager {
     this.sequence = [];
     this.guessPhase = new GuessPhase();
     this.challengePhase = new ChallengePhase();
-    this.soundtrack = document.getElementById('sound-track');
+    this.trackChallenge = document.getElementById('soundtrack-challenge');
+    this.trackMenu = document.getElementById('soundtrack-menu');
   }
 
   handle(state) {
     switch(state) {
       case 'idle':
         this.idle();
+        break;
+      case 'menu':
+        this.menu();
         break;
       case 'challenge':
         this.challenge();
@@ -39,12 +43,26 @@ export default class StateManager {
   }
 
   idle() {
+    INFO.toggle('on', 'click anywhere to begin');
+    document.addEventListener('click', this.goToMenu);
+  }
+
+  goToMenu() {
+    STATE.set('menu');
+  }
+
+  menu() {
+    document.removeEventListener('click', this.goToMenu);
+    INFO.toggle('off');
+    MENU.toggle('on');
+    this.trackMenu.play();
   }
 
 
   challenge() {
-    this.soundtrack.play();
     MENU.toggle('off');
+    this.trackMenu.pause();
+    this.trackChallenge.play();
     INFO.toggle('on', 'Memorize');
     let newNumber = Math.floor(Math.random() * Math.floor(4));
     this.sequence.push(newNumber);
@@ -72,7 +90,7 @@ export default class StateManager {
   }
 
   gameover() {
-    this.soundtrack.load();
+    this.trackChallenge.load();
     INFO.toggle('on', `Game Over, Score: ${this.sequence.length - 1}`);
     MENU.toggle('on');
     this.sequence = [];

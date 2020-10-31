@@ -71,14 +71,20 @@ body {
 }
 
 #sound-volume-container {
-  margin-top: 1rem
+  margin-top: 1rem;
+  background-color: whitesmoke;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
 }
-#sound-volume {
+
+#sound-volume-label {
   font-size: x-large;
 }
 
 /* Info Panel */
 #info-panel-container {
+  cursor: pointer;
   left: 0;
   right: 0;
   margin-left: auto;
