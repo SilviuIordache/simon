@@ -1,23 +1,22 @@
+import STATE from './state.js';
+import MENU from './menu.js';
 import ChallengePhase from './challengePhase.js';
 import GuessPhase from './guessPhase.js';
-import InfoPanel from './info.js';
-import STATE from './state.js';
+import INFO from './info.js';
+
 
 export default class StateManager {
   constructor() {
     this.sequence = [];
     this.guessPhase = new GuessPhase();
     this.challengePhase = new ChallengePhase();
-    this.info = new InfoPanel();
+    this.soundtrack = document.getElementById('sound-track');
   }
 
   handle(state) {
     switch(state) {
       case 'idle':
         this.idle();
-        break;
-      case 'gameover':
-        this.gameover();
         break;
       case 'challenge':
         this.challenge();
@@ -33,31 +32,20 @@ export default class StateManager {
         break;
       case 'gameover':
         this.gameover();
+        break;
       default:
         break;
     }
   }
 
   idle() {
-    this.info.toggle('on', 'Click anywhere to start');
-    this.addStartGameListener();
   }
 
-  addStartGameListener() {
-    document.addEventListener('click', this.gameInitiator);
-  }
-
-  removeStartGameListener() {
-    document.removeEventListener('click', this.gameInitiator);
-  }
-
-  gameInitiator() {
-    STATE.set('challenge');
-  }
 
   challenge() {
-    this.removeStartGameListener();
-    this.info.toggle('on', 'Memorize');
+    this.soundtrack.play();
+    MENU.toggle('off');
+    INFO.toggle('on', 'Memorize');
     let newNumber = Math.floor(Math.random() * Math.floor(4));
     this.sequence.push(newNumber);
     this.challengePhase.playSequence(this.sequence);
@@ -68,26 +56,25 @@ export default class StateManager {
   }
   
   roundwin() {
-    this.info.toggle('on', `round win, score: ${this.sequence.length}`);
+    INFO.toggle('on', `round win, score: ${this.sequence.length}`);
     setTimeout(() => {
-      this.info.toggle('off')
+      INFO.toggle('off')
       STATE.set('challenge');
     }, 1500);
   }
 
   handoff() {
-    this.info.toggle('on', 'Guess the correct order');
+    INFO.toggle('on', 'Guess');
     setTimeout(() => {
-      this.info.toggle('off')
+      INFO.toggle('off')
       STATE.set('guessing');
     }, 1000);
   }
 
   gameover() {
-    this.info.toggle('on', `game over; score: ${this.sequence.length}. click anywhere to restart`);
+    this.soundtrack.load();
+    INFO.toggle('on', `Game Over, Score: ${this.sequence.length - 1}`);
+    MENU.toggle('on');
     this.sequence = [];
-    setTimeout(() => {
-      this.addStartGameListener();
-    }, 0);
   }
 }
