@@ -3,10 +3,8 @@ import STATE from './state.js';
 
 
 export default class ChallengePhase {
-  // constructor(sequence) {
-  //   this.sequence = sequence;
-  // }
-
+  constructor() {}
+  
   playSequence(sequence) {
     console.log(sequence)
     let index = 0;

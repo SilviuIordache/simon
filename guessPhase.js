@@ -53,6 +53,20 @@ export default class GuessPhase {
     this.evaluateSequence();
   }
 
+  addGuessListeners() {
+    red.addEventListener('click', this.redListener);
+    yellow.addEventListener('click', this.yellowListener);
+    blue.addEventListener('click', this.blueListener);
+    green.addEventListener('click', this.greenListener);
+  }
+
+  removeGuessListeners() {
+    red.removeEventListener('click', this.redListener);
+    yellow.removeEventListener('click', this.yellowListener);
+    blue.removeEventListener('click', this.blueListener);
+    green.removeEventListener('click', this.greenListener);
+  }
+
   startCountDown() {
     clearInterval(this.countDown);
     let counter = 5 + this.challengeSequence.length;
@@ -66,21 +80,6 @@ export default class GuessPhase {
         clearInterval(this.countDown);
       }
     }, 1000);
-
-  }
-
-  addGuessListeners() {
-    red.addEventListener('click', this.redListener);
-    yellow.addEventListener('click', this.yellowListener);
-    blue.addEventListener('click', this.blueListener);
-    green.addEventListener('click', this.greenListener);
-  }
-
-  removeGuessListeners() {
-    red.removeEventListener('click', this.redListener);
-    yellow.removeEventListener('click', this.yellowListener);
-    blue.removeEventListener('click', this.blueListener);
-    green.removeEventListener('click', this.greenListener);
   }
 
   evaluateSequence() {
