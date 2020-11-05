@@ -1,8 +1,9 @@
-import STATE from './state.js';
-import MENU from './menu.js';
 import ChallengePhase from './challengePhase.js';
 import GuessPhase from './guessPhase.js';
+import STATE from './state.js';
+import MENU from './menu.js';
 import INFO from './info.js';
+import SOUND from './sound.js';
 
 
 export default class StateManager {
@@ -10,8 +11,6 @@ export default class StateManager {
     this.sequence = [];
     this.guessPhase = new GuessPhase();
     this.challengePhase = new ChallengePhase();
-    this.trackChallenge = document.getElementById('soundtrack-challenge');
-    this.trackMenu = document.getElementById('soundtrack-menu');
   }
 
   handle(state) {
@@ -45,6 +44,15 @@ export default class StateManager {
   idle() {
     INFO.toggle('on', 'click anywhere to begin');
     document.addEventListener('click', this.goToMenu);
+    document.addEventListener('keyup', this.returnToMenu);
+  }
+
+  returnToMenu(e) {
+    if (e.key == "Escape") {
+      if (STATE.get() != 'menu') {
+        STATE.set('menu');
+      }
+    }
   }
 
   goToMenu() {
@@ -55,14 +63,13 @@ export default class StateManager {
     document.removeEventListener('click', this.goToMenu);
     INFO.toggle('off');
     MENU.toggle('on');
-    this.trackMenu.play();
+    SOUND.playMusic('menu');
   }
 
 
   challenge() {
     MENU.toggle('off');
-    this.trackMenu.pause();
-    this.trackChallenge.play();
+    SOUND.playMusic('challenge');
     INFO.toggle('on', 'Memorize');
     let newNumber = Math.floor(Math.random() * Math.floor(4));
     this.sequence.push(newNumber);
@@ -90,7 +97,7 @@ export default class StateManager {
   }
 
   gameover() {
-    this.trackChallenge.load();
+    SOUND.playMusic('none');
     INFO.toggle('on', `Game Over, Score: ${this.sequence.length - 1}`);
     MENU.toggle('on');
     this.sequence = [];
