@@ -86,7 +86,7 @@ export default class StateManager {
     setTimeout(() => {
       INFO.toggle('off')
       STATE.set('challenge');
-    }, 1500);
+    }, 2500);
   }
 
   handoff() {
@@ -98,7 +98,7 @@ export default class StateManager {
   }
 
   gameover() {
-    SOUND.playMusic('none');
+    SOUND.reset();
     INFO.toggle('on', `Game Over, Score: ${this.sequence.length - 1}`);
     MENU.toggle('on');
     this.sequence = [];

@@ -98,7 +98,7 @@ export default class GuessPhase {
        STATE.set('roundwin');
        this.removeGuessListeners();
       } else {
-        INFO.toggle('on', 'good')
+        // INFO.toggle('on', 'good')
         setTimeout(() => {
           INFO.toggle('off')
         }, 500)
