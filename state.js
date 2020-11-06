@@ -4,23 +4,15 @@ class State {
   constructor (storage) {
     this.stateManager = new StateManager();
     this.FIELDNAME = 'simonState';
-    this.STATES = {
-      idle: 'idle',
-      challenge: 'challenge',
-      handoff: 'handoff',
-      guessing: 'guessing',
-      roundwin: 'roundwin',
-      gameover: 'gameover'
-    };
     this.storage = storage;
   }
 
   get() {
-    return this.storage.getItem(this.FIELDNAME) || this.STATES.idle;
+    return this.storage.getItem(this.FIELDNAME);
   }
 
   set(state) {
-    this.storage.setItem(this.FIELDNAME, state || this.STATES.idle);
+    this.storage.setItem(this.FIELDNAME, state);
     console.log(`state: ${state}`);
     this.stateManager.handle(state);
   }

@@ -18,8 +18,8 @@ export default class StateManager {
       case 'idle':
         this.idle();
         break;
-      case 'menu':
-        this.menu();
+      case 'pregame':
+        this.pregame();
         break;
       case 'challenge':
         this.challenge();
@@ -43,24 +43,25 @@ export default class StateManager {
 
   idle() {
     INFO.toggle('on', 'click anywhere to begin');
-    document.addEventListener('click', this.goToMenu);
-    document.addEventListener('keyup', this.returnToMenu);
+    document.addEventListener('click', this.goToPreGame);
+    document.addEventListener('keyup', this.returnToIdle);
   }
 
-  returnToMenu(e) {
+  returnToIdle(e) {
     if (e.key == "Escape") {
-      if (STATE.get() != 'menu') {
-        STATE.set('menu');
+      if (STATE.get() != 'pregame') {
+        //STATE.set('pregame');
+        location.reload();
       }
     }
   }
 
-  goToMenu() {
-    STATE.set('menu');
+  goToPreGame() {
+    STATE.set('pregame');
   }
 
-  menu() {
-    document.removeEventListener('click', this.goToMenu);
+  pregame() {
+    document.removeEventListener('click', this.goToPreGame);
     INFO.toggle('off');
     MENU.toggle('on');
     SOUND.playMusic('menu');
