@@ -19,8 +19,22 @@
 
       <div>
         <div id="sound-volume-container">
-          <label id="sound-volume-label">SOUND</label>
-          <input id="sound-volume" type="range" min="0" max="1" step="0.02">
+          <div class="volume-container">
+            <label id="sound-volume-label">MUSIC</label>
+            <div>
+              <img id="music-no-sound" class="hide" src="./icons/red-x.svg" alt="red-x" width="18"> 
+              <input id="music-volume" type="range" min="0" max="1" step="0.01">
+            </div>
+          </div>
+
+          <div class="volume-container">
+            <label id="sound-volume-label">AUDIO CUES</label>
+            <div>
+              <img id="cues-no-sound" class="hide" src="./icons/red-x.svg" alt="red-x" width="18" > 
+              <input id="cues-volume" type="range" min="0" max="1" step="0.01">
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

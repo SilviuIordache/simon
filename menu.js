@@ -10,6 +10,7 @@ class Menu {
 
   setup() {
     this.startButton.onclick = function() {
+      SOUND.playMusic('none');
       STATE.set('challenge')
     }
 
