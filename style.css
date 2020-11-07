@@ -7,6 +7,10 @@ body {
   grid-template-columns: auto auto;
 }
 
+.square {
+  height: 50vh;
+  cursor: pointer;
+}
 
 #red {
   background-color: #ff6963;
@@ -24,10 +28,6 @@ body {
   background-color: #80ff86;
 }
 
-
-.square {
-  height: 50vh;
-}
 
 @keyframes demo {
   0% {
@@ -68,6 +68,7 @@ body {
 
 #start-button {
   font-size: xx-large;
+  cursor: pointer;
 }
 
 #sound-volume-container {
@@ -82,6 +83,10 @@ body {
 .volume-container {
   display: flex;
   justify-content: space-between;
+}
+
+.volume-slider {
+  cursor: pointer;
 }
 
 #sound-volume-label {
