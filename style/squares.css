@@ -1,0 +1,52 @@
+
+.squares-container {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.square {
+  height: 50vh;
+  cursor: pointer;
+}
+
+#red {
+  background-color: #ff6963;
+}
+
+#yellow {
+  background-color: #ffee6b;
+}
+
+#blue {
+  background-color: #6bb3ff;
+}
+
+#green {
+  background-color: #80ff86;
+}
+
+
+@keyframes demo {
+  0% {
+    opacity:1;
+  }
+  22% {
+    opacity:0.7;
+  }
+  50% {
+    opacity:0.2;
+  }
+  77% {
+    opacity:0.7;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+.flash {
+  animation-name: demo;
+  animation-duration: 400ms;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in-out;
+}
