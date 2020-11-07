@@ -1,0 +1,11 @@
+@import './squares.css';
+@import './menu.css';
+@import './info.css';
+
+body {
+  margin: 0px;
+}
+
+.hide {
+  visibility: hidden;
+}
