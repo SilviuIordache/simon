@@ -92,7 +92,7 @@ export default class GuessPhase {
 
     if (guess) {
       if (this.guessSequence.length === this.challengeSequence.length) {
-       console.log('you guessed the whole sequence');
+      //  console.log('you guessed the whole sequence');
        this.guessSequence = [];
        clearInterval(this.countDown);
        STATE.set('roundwin');
