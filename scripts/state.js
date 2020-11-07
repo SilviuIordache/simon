@@ -13,7 +13,7 @@ class State {
 
   set(state) {
     this.storage.setItem(this.FIELDNAME, state);
-    console.log(`state: ${state}`);
+    // console.log(`state: ${state}`);
     this.stateManager.handle(state);
   }
 }
