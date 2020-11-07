@@ -6,7 +6,7 @@ export default class ChallengePhase {
   constructor() {}
   
   playSequence(sequence) {
-    console.log(sequence)
+    // console.log(sequence)
     let index = 0;
     let interval = setInterval( () => {
       playColor(sequence[index]);
